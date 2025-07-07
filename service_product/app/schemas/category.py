@@ -6,4 +6,7 @@ class CategoryOut(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
+class CategoryInput(BaseModel):
+    name: str
+
 

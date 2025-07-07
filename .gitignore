@@ -14,7 +14,7 @@ env/
 
 # Archivos de configuración sensibles
 .env
-*.env
+!.env.example
 
 # Compilados y temporales
 *.sqlite3
