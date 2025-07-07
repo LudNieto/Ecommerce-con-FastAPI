@@ -1,0 +1,68 @@
+# 🐍 Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.log
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+.env/
+
+# Archivos de configuración sensibles
+.env
+*.env
+
+# Compilados y temporales
+*.sqlite3
+*.db
+*.egg-info/
+dist/
+build/
+
+# Archivos de pruebas / cobertura
+.coverage
+.tox/
+pytest_cache/
+htmlcov/
+
+# IDEs / editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Mac y otros
+.DS_Store
+Thumbs.db
+
+# Docker
+**/docker-compose.override.yml
+**/Dockerfile.*
+**/docker-compose*.log
+
+# FastAPI + Uvicorn
+*.pid
+
+# Node.js (si usas frontend o Swagger personalizado)
+node_modules/
+npm-debug.log*
+
+# MyPy / Linter cache
+.mypy_cache/
+.pytype/
+
+# SQLite or local DB
+*.sqlite3
+
+# Coverage reports
+*.lcov
+coverage.xml
+
+# Others (optional)
+logs/
+*.bak
+*.swp
