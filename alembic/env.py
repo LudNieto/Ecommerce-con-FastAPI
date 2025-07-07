@@ -1,9 +1,10 @@
 from logging.config import fileConfig
-from sqlalchemy import engine_from_config
+from sqlalchemy import engine_from_config, MetaData
 from sqlalchemy import pool
 from alembic import context
-from service_auth.app.models import models
-from service_auth.app.db.database import Base
+from service_product.app.models import models as product_models
+from service_auth.app.models import models as auth_models
+from common_db.base import Base
 from service_auth.app.core.config import settings
 
 config = context.config
@@ -39,7 +40,7 @@ def run_migrations_online() -> None:
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection, target_metadata=target_metadata,
         )
 
         with context.begin_transaction():
