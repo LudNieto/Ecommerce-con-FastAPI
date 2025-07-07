@@ -1,9 +1,11 @@
-from sqlalchemy import Integer, Column, String, Boolean, DateTime, Text, Numeric, ForeignKey
+from sqlalchemy import Integer, Column, String, Boolean, DateTime, Text, Numeric, ForeignKey, UniqueConstraint
 from sqlalchemy import Enum as SQLEnum
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.sql.expression import text
 from common_db.base import Base
 from enum import Enum
+
+from common_db.models import User
 
 class ProductStatus(str, Enum):
     ACTIVE = "active"
@@ -57,3 +59,5 @@ class OrderItem(Base):
     quantity = Column(Integer, nullable=False)
     price_at_time_of_order = Column(Numeric(12,2), nullable=False)
     iva_at_time_of_order = Column(Numeric(5,2), nullable=False)
+
+    __table_args__ = (UniqueConstraint('order_id', 'product_id', name='_order_product_uc'),)

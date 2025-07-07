@@ -15,8 +15,6 @@ async def update_user(user_id: int, user_data: UserUpdate, db: Session) -> UserO
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    update_data = user_data.model_dump(exclude_unset=True)
-
     for key, value in user_data.model_dump(exclude_unset=True).items():
         if key == "password":
             setattr(user, "hashed_password", get_password_hash(value))

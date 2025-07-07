@@ -7,7 +7,5 @@ app = FastAPI(
     description="Authentication API for authentication and user management",
     version="1.0.0",)
 
-Base.metadata.create_all(bind=engine)
-
 app.include_router(auth.router)
 app.include_router(user.router)
