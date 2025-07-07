@@ -24,8 +24,8 @@ class OrderItemOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 class OrderItemCreateInput(BaseModel):
-    product_id: int = Field(..., gt=0, description="ID del producto.")
-    quantity: int = Field(..., gt=0, description="Cantidad del producto.")
+    product_id: int
+    quantity: int = Field(..., gt=0, description="Cantidad del producto (Mayor que 0).")
 
 class OrderCreateWithItems(BaseModel):
     user_id: int

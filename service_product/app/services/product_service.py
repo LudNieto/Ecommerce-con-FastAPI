@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from app.schemas.product import ProductOut, ProductCreate, ProductUpdate
 from fastapi import HTTPException
-from app.models.models import Product, ProductStatus
+from app.models.models import Product, ProductStatus, Category
 
 async def get_product_by_id(product_id: int, db: Session) -> ProductOut:
     product = db.query(Product).filter(Product.id == product_id).first()
@@ -24,6 +24,14 @@ async def get_all_products_by_category(category_id: int, db: Session) -> list[Pr
     return [ProductOut.model_validate(product) for product in products]
 
 async def create_product(product_data: ProductCreate, db: Session) -> ProductOut:
+    if product_data.category_id:
+        category = db.query(Category).filter(Category.id == product_data.category_id).first()
+        if not category:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Category with ID {product_data.category_id} not found"
+            )
+
     new_product = Product(**product_data.model_dump())
     db.add(new_product)
     db.commit()
@@ -34,8 +42,18 @@ async def update_product(product_id: int, product_data: ProductUpdate, db: Sessi
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
-    
-    for key, value in product_data.model_dump(exclude_unset=True).items():
+
+    updates = product_data.model_dump(exclude_unset=True)
+
+    if "category_id" in updates and updates["category_id"] is not None:
+        category = db.query(Category).filter(Category.id == updates["category_id"]).first()
+        if not category:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Category with ID {updates['category_id']} not found"
+            )
+
+    for key, value in updates.items():
         setattr(product, key, value)
 
     db.commit()
