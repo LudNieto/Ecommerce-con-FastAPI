@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import product, category
+from app.routes import product, category, order
 from app.db.database import engine, Base
 
 app = FastAPI(
@@ -9,3 +9,4 @@ app = FastAPI(
 
 app.include_router(product.router)
 app.include_router(category.router)
+app.include_router(order.router)
