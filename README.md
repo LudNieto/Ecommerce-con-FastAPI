@@ -134,10 +134,11 @@ Abre una terminal para cada servicio para ejecutarlos de forma concurrente.
 1. Abre una nueva terminal.
 2. Navega a la raíz del proyecto.
 3. Activa el entorno virtual y configura el PYTHONPATH (ver pasos 4 y 5).
-4. Inicia el servidor Uvicorn para el servicio de autenticación:
+4. Navega a la carpeta del servicio.
+5. Inicia el servidor Uvicorn para el servicio de autenticación:
 
     ```sh
-    uvicorn service_auth.app.main:app --reload --port 8000
+    uvicorn app.main:app --reload --port 8000
     ```
 
    - La API de autenticación estará disponible en: [http://127.0.0.1:8000](http://127.0.0.1:8000)
@@ -148,10 +149,11 @@ Abre una terminal para cada servicio para ejecutarlos de forma concurrente.
 1. Abre otra nueva terminal.
 2. Navega a la raíz del proyecto.
 3. Activa el entorno virtual y configura el PYTHONPATH (ver pasos 4 y 5).
-4. Inicia el servidor Uvicorn para el servicio de productos en un puerto diferente:
+4. Navega a la carpeta del servicio.
+5. Inicia el servidor Uvicorn para el servicio de productos en un puerto diferente:
 
     ```sh
-    uvicorn service_product.app.main:app --reload --port 8001
+    uvicorn app.main:app --reload --port 8001
     ```
 
    - La API de productos estará disponible en: [http://127.0.0.1:8001](http://127.0.0.1:8001)
