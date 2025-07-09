@@ -41,17 +41,17 @@ cd NOMBRE_DEL_DIRECTORIO_PROYECTO
 
 ### **3. Configuración de Variables de Entorno**
 
-Este proyecto utiliza un único archivo `.env` compartido a nivel de proyecto para todos los microservicios, ya que todos usan las mismas credenciales de base de datos y configuración general.  
-**No es necesario copiar el .env para cada microservicio**.
+Cada microservicio requiere su propio archivo `.env` en la raíz de su carpeta correspondiente.  
+**Debes crear un archivo `.env` dentro de la raíz de _cada_ microservicio** (por ejemplo, `service_auth/.env`, `service_product/.env`, etc.), ya que cada uno puede tener su propia configuración y credenciales.
 
-Copia el archivo de ejemplo y edítalo con tus credenciales:
+Copia el archivo de ejemplo provisto en cada microservicio y edítalo con tus credenciales:
 
 ```
-# Copiar archivo .env global  
+# Copiar archivo .env ejemplo dentro de cada microservicio
 cp .env.example .env  
 ```
 
-Edita el archivo `.env` en la raíz del proyecto con la configuración de tu base de datos y las variables necesarias:
+Edita el archivo `.env` en la raíz de _cada_ microservicio con la configuración de tu base de datos y las variables necesarias:
 
 ```
 DB_USER=tu_usuario_db
@@ -135,7 +135,8 @@ Abre una terminal para cada servicio para ejecutarlos de forma concurrente.
 2. Navega a la raíz del proyecto.
 3. Activa el entorno virtual y configura el PYTHONPATH (ver pasos 4 y 5).
 4. Navega a la carpeta del servicio.
-5. Inicia el servidor Uvicorn para el servicio de autenticación:
+5. Asegúrate de haber creado el archivo `service_auth/.env` con los datos necesarios.
+6. Inicia el servidor Uvicorn para el servicio de autenticación:
 
     ```sh
     uvicorn app.main:app --reload --port 8000
@@ -150,7 +151,8 @@ Abre una terminal para cada servicio para ejecutarlos de forma concurrente.
 2. Navega a la raíz del proyecto.
 3. Activa el entorno virtual y configura el PYTHONPATH (ver pasos 4 y 5).
 4. Navega a la carpeta del servicio.
-5. Inicia el servidor Uvicorn para el servicio de productos en un puerto diferente:
+5. Asegúrate de haber creado el archivo `service_product/.env` con los datos necesarios.
+6. Inicia el servidor Uvicorn para el servicio de productos en un puerto diferente:
 
     ```sh
     uvicorn app.main:app --reload --port 8001
@@ -163,8 +165,8 @@ Abre una terminal para cada servicio para ejecutarlos de forma concurrente.
 
 ## **Notas adicionales**
 
-- Si tienes más microservicios, repite el procedimiento cambiando el módulo y puerto correspondiente.
-- Si el frontend está en otro repositorio o carpeta, asegúrate de que `FRONTEND_URL` en el `.env` coincida con su URL de desarrollo para evitar problemas de CORS.
+- Si tienes más microservicios, repite el procedimiento cambiando el módulo, puerto y asegurándote de crear el archivo `.env` correspondiente en la raíz de cada uno.
+- Si el frontend está en otro repositorio o carpeta, asegúrate de que `FRONTEND_URL` en el `.env` de cada microservicio coincida con su URL de desarrollo para evitar problemas de CORS.
 - No compartas tus archivos `.env` ni tus credenciales sensibles.
 - Si agregas nuevas variables al `.env` y no las utilizas en algún servicio, no generarán error gracias a la configuración `extra = "ignore"`.
 
