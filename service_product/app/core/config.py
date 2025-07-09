@@ -11,6 +11,6 @@ class Settings(BaseSettings):
     DB_NAME: str
     DB_PORT: int
 
-    
+    FRONTEND_URL: str
 
 settings = Settings()
