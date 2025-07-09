@@ -11,7 +11,6 @@ class ProductStatus(str, Enum):
     ACTIVE = "active"
     INACTIVE = "inactive"
     OUT_OF_STOCK = "out_of_stock"
-    DELETED = "deleted"
 
 class OrderStatus(str, Enum):
     PENDING = "pending"
